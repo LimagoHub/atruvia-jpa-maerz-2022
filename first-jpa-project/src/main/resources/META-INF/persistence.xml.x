@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-  <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
-               version="3.0">
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
 <persistence-unit name="atruvia"	transaction-type="RESOURCE_LOCAL">
   <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-  <shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
 
+  <shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
   <properties>
     <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
     <property name="hibernate.hbm2ddl.auto" value="update" />
