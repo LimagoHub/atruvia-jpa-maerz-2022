@@ -2,5 +2,11 @@
 <project version="4">
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
+    <option name="reverseEngineeringLastDbConnectionId" value="8a1ae010-8046-4fef-9ef7-8b22d2789df1" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/de/limago/entities" />
+    <reUseDbSnapshotConnections>
+      <dbConnection id="8a1ae010-8046-4fef-9ef7-8b22d2789df1" />
+    </reUseDbSnapshotConnections>
+    <option name="newEntityIdStrategy" />
   </component>
 </project>
