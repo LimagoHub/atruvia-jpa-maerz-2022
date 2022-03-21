@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 // Lombok
@@ -30,6 +31,9 @@ public class PersonEntity {
     @Column(length = 30, nullable = false)
     private String nachname;
 
+    @Version
+    //private long version;
+    private LocalDateTime version;
 
     @Override
     public boolean equals(Object o) {

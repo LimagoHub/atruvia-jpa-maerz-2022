@@ -6,7 +6,11 @@ import de.limago.entities.PersonEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Hello world!
@@ -28,13 +32,15 @@ public class App
             entityManagerFactory.close();}
         ));
 
+        //persistDemo(entityManagerFactory);
+
 
         //finderDemo(entityManagerFactory);
 
 
-        //mergeDemo(entityManagerFactory);
+        mergeDemo(entityManagerFactory);
 
-        removeDemo(entityManagerFactory);
+        //removeDemo(entityManagerFactory);
 
 
         System.out.println("fertig");
@@ -68,7 +74,7 @@ public class App
             // Öffnet die Session. Zugeordnet ist immer first-level-cache
             em = entityManagerFactory.createEntityManager();
             em.getTransaction().begin();
-            final var nonAttached = PersonEntity.builder().id("3407df7f-eef8-4707-aac6-fafcd5e6dfeb").vorname("John").nachname("Wick").build();
+            final var nonAttached = PersonEntity.builder().id("d1eb623d-5d72-4951-a98f-1e2eef167600").vorname("Erika").nachname("Mustermann").version(LocalDateTime.now().minus(3, ChronoUnit.DAYS)).build();
 
 
             var attachedPerson = em.merge(nonAttached);  // Save or Update
@@ -78,6 +84,7 @@ public class App
             em.getTransaction().commit();
         }
         catch(RuntimeException e) {
+            e.printStackTrace();
             if (em != null)  em.getTransaction().rollback();
         }
         finally {
@@ -119,7 +126,8 @@ public class App
             em.getTransaction().begin();
             // Macht John attached
             em.persist(john);
-
+            john.setVorname("Jane");
+            john.setVorname("Jane");
             john.setVorname("Jane");
             em.getTransaction().commit();
         }
