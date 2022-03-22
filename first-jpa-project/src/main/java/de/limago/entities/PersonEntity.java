@@ -21,11 +21,11 @@ import java.util.UUID;
 @SuperBuilder
 
 @Entity
-@Table(name="tbl_personen")
-public class PersonEntity extends BaseEntity{
+@Table(name = "tbl_personen")
+public class PersonEntity extends BaseEntity {
 
 
-//    @Id
+    //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private int id;
 //
@@ -46,7 +46,6 @@ public class PersonEntity extends BaseEntity{
 
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    private List<String> sprachen = new ArrayList<>();
-
 
 
     @Override

@@ -15,7 +15,7 @@ import javax.persistence.*;
 @SuperBuilder
 
 @Entity
-@Table(name="tbl_tiere")
+@Table(name = "tbl_tiere")
 @Inheritance(strategy = InheritanceType.JOINED)
 //@DiscriminatorColumn(name = "DTYPE", length = 31)
 public abstract class AbstractTier {
