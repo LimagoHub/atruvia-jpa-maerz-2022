@@ -11,6 +11,6 @@ public interface CustomersRepository extends CrudRepository<Customer,String> {
 
     List<Customer> findByCity(String city);
 
-    @Query("select new de.atruvia.springdemo.de.repositories.entities.TinyCustomer(c.companyName, c.city) from Customer c")
+    @Query("select new de.repositories.entities.TinyCustomer(c.companyName, c.city) from Customer c")
     List<TinyCustomer> findAllTinyCustomers();
 }
