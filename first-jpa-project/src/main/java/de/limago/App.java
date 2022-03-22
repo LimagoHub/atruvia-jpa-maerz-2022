@@ -1,16 +1,11 @@
 package de.limago;
 
-import com.arjuna.ats.internal.arjuna.recovery.Connection;
-import de.limago.entities.PersonEntity;
+import de.limago.entities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Hello world!
@@ -38,9 +33,33 @@ public class App
         //finderDemo(entityManagerFactory);
 
 
-        mergeDemo(entityManagerFactory);
+
+        //mergeDemo(entityManagerFactory);
 
         //removeDemo(entityManagerFactory);
+
+        EntityManager em = null;
+        try {
+            // Öffnet die Session. Zugeordnet ist immer first-level-cache
+            em = entityManagerFactory.createEntityManager();
+            em.getTransaction().begin();
+
+//            final HundEntity fiffi = HundEntity.builder().id(UUID.randomUUID().toString()).name("Fiffy").anzahlBellen(3).build();
+//            em.persist(fiffi);
+
+            AbstractTier fiffi = em.find(AbstractTier.class, "09866ac3-7e0c-42fd-aead-bb67490e3c61");
+            System.out.println(fiffi);
+
+            em.getTransaction().commit();
+        }
+        catch(RuntimeException e) {
+            e.printStackTrace();
+            if (em != null)  em.getTransaction().rollback();
+        }
+        finally {
+            // Vernichtet die Session und den Cache
+            if (em != null) em.close();
+        }
 
 
         System.out.println("fertig");
@@ -74,7 +93,7 @@ public class App
             // Öffnet die Session. Zugeordnet ist immer first-level-cache
             em = entityManagerFactory.createEntityManager();
             em.getTransaction().begin();
-            final var nonAttached = PersonEntity.builder().id("d1eb623d-5d72-4951-a98f-1e2eef167600").vorname("Erika").nachname("Mustermann").version(LocalDateTime.now().minus(3, ChronoUnit.DAYS)).build();
+            final var nonAttached = PersonEntity.builder().id("d1eb623d-5d72-4951-a98f-1e2eef167600").vorname("Erika").nachname("Mustermann").version(1).build();
 
 
             var attachedPerson = em.merge(nonAttached);  // Save or Update
@@ -96,14 +115,17 @@ public class App
     private void finderDemo(EntityManagerFactory entityManagerFactory) {
         //persistDemo(entityManagerFactory);
         EntityManager em = null;
+        PersonEntity p=null;
         try {
             // Öffnet die Session. Zugeordnet ist immer first-level-cache
             em = entityManagerFactory.createEntityManager();
             em.getTransaction().begin();
 
-            var p = em.find(PersonEntity.class,"3407df7f-eef8-4707-aac6-fafcd5e6dfea" );
-            p.setVorname("Peter");
+            p = em.find(PersonEntity.class,"a4eba677-2c2d-45a6-aad3-d9114273a659" );
+            p = em.find(PersonEntity.class,"a4eba677-2c2d-45a6-aad3-d9114273a659" );
 
+
+            System.out.println(p);
             em.getTransaction().commit();
         }
         catch(RuntimeException e) {
@@ -113,11 +135,19 @@ public class App
             // Vernichtet die Session und den Cache
             if (em != null) em.close();
         }
+
+
     }
 
     private void persistDemo(EntityManagerFactory entityManagerFactory) {
         final var john = PersonEntity.builder().id(UUID.randomUUID().toString()).vorname("John").nachname("Doe").build();
 
+        john.getAdresse().setOrt("Frankfurt");
+        john.getAdresse().setStrasse("Die Zeil");
+
+        Kontakt k;
+        john.getKontakte().add(k = new Kontakt("email","max@atruvia.de"));
+        john.getKontakte().add(new Kontakt("web","www.atruvia.de"));
         // guenstig
         EntityManager em = null;
         try {
@@ -126,12 +156,14 @@ public class App
             em.getTransaction().begin();
             // Macht John attached
             em.persist(john);
-            john.setVorname("Jane");
-            john.setVorname("Jane");
-            john.setVorname("Jane");
+            System.out.println(john);
+            john.setVorname("xxx");
+
+            //john.getKontakte().remove(k);
             em.getTransaction().commit();
         }
         catch(RuntimeException e) {
+            e.printStackTrace();
             if (em != null)  em.getTransaction().rollback();
         }
         finally {
