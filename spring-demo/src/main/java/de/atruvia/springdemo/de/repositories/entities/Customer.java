@@ -14,6 +14,11 @@ import java.util.List;
 @ToString
 @Entity
 @Table(name = "customers")
+@NamedQueries(
+        {
+                @NamedQuery(name="Customer.findNachKontakt",query = "select c from Customer c where c.contactName = :contactName")
+        }
+)
 public class Customer {
     @Id
     @Column(name = "CustomerID", nullable = false, length = 5)

@@ -22,7 +22,8 @@ public class Product {
     @Column(name = "Productname", nullable = false, length = 40)
     private String productName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne
     @JoinColumn(name = "Supplierid")
     private Supplier supplierID;
 

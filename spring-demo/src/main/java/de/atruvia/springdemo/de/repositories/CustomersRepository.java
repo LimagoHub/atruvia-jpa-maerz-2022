@@ -16,4 +16,6 @@ public interface CustomersRepository extends CrudRepository<Customer,String> {
 
     @Query("select distinct c from Customer c left join fetch c.orders o where c.city = :city")
     List<Customer> findDistinctCustomersWithOrders(String city);
+
+    List<Customer> findNachKontakt(String contactName);
 }
