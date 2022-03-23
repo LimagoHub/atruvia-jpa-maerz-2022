@@ -11,6 +11,9 @@ public interface CustomersRepository extends CrudRepository<Customer,String> {
 
     List<Customer> findByCity(String city);
 
-    @Query("select new de.repositories.entities.TinyCustomer(c.companyName, c.city) from Customer c")
-    List<TinyCustomer> findAllTinyCustomers();
+//    @Query("select new de.repositories.entities.TinyCustomer(c.companyName, c.city) from Customer c")
+//    List<TinyCustomer> findAllTinyCustomers();
+
+    @Query("select distinct c from Customer c left join fetch c.orders o where c.city = :city")
+    List<Customer> findDistinctCustomersWithOrders(String city);
 }

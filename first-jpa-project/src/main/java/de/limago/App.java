@@ -49,7 +49,7 @@ public class App {
 //
 //        resultList.forEach(System.out::println);
 
-        var query = em.createQuery("Select count(*) from CustomerEntity c", Long.class);
+        var query = em.createQuery("Select count(*) from Customer c", Long.class);
         long anzahl = query.getSingleResult();
 
         System.out.println(anzahl);

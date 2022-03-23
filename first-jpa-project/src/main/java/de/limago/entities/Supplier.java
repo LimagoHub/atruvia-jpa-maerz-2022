@@ -1,10 +1,8 @@
-package de.atruvia.springdemo.de.repositories.entities;
+package de.limago.entities;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -13,11 +11,12 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "suppliers")
+public class Supplier {
     @Id
-    @Column(name = "CustomerID", nullable = false, length = 5)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SupplierID", nullable = false)
+    private Integer id;
 
     @Column(name = "Companyname", nullable = false, length = 40)
     private String companyName;
@@ -37,7 +36,7 @@ public class Customer {
     @Column(name = "Region", length = 15)
     private String region;
 
-    @Column(name = "PostalCode", length = 10)
+    @Column(name = "Postalcode", length = 10)
     private String postalCode;
 
     @Column(name = "Country", length = 15)
@@ -49,8 +48,8 @@ public class Customer {
     @Column(name = "Fax", length = 24)
     private String fax;
 
-    @OneToMany(mappedBy = "customerID")
-    @ToString.Exclude
-    private List<Order> orders = new ArrayList<>();
+    @Lob
+    @Column(name = "Homepage")
+    private String homePage;
 
 }

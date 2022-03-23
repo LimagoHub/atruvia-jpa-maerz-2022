@@ -1,4 +1,4 @@
-package de.atruvia.springdemo.de.repositories.entities;
+package de.limago.entities;
 
 import lombok.*;
 

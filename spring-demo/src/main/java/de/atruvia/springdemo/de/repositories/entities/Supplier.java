@@ -1,12 +1,8 @@
-package de.limago.entities;
+package de.atruvia.springdemo.de.repositories.entities;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -15,19 +11,20 @@ import java.util.Set;
 @Setter
 @ToString
 @Entity
-@Table(name = "customers")
-public class CustomerEntity {
+@Table(name = "suppliers")
+public class Supplier {
     @Id
-    @Column(name = "CustomerID", nullable = false, length = 5)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SupplierID", nullable = false)
+    private Integer id;
 
-    @Column(name = "CompanyName", nullable = false, length = 40)
+    @Column(name = "Companyname", nullable = false, length = 40)
     private String companyName;
 
-    @Column(name = "ContactName", length = 30)
+    @Column(name = "Contactname", length = 30)
     private String contactName;
 
-    @Column(name = "ContactTitle", length = 30)
+    @Column(name = "Contacttitle", length = 30)
     private String contactTitle;
 
     @Column(name = "Address", length = 60)
@@ -39,7 +36,7 @@ public class CustomerEntity {
     @Column(name = "Region", length = 15)
     private String region;
 
-    @Column(name = "PostalCode", length = 10)
+    @Column(name = "Postalcode", length = 10)
     private String postalCode;
 
     @Column(name = "Country", length = 15)
@@ -51,8 +48,8 @@ public class CustomerEntity {
     @Column(name = "Fax", length = 24)
     private String fax;
 
-    @OneToMany(mappedBy = "customerID")
-    @ToString.Exclude
-    private List<OrderEntity> orders = new ArrayList<>();
+    @Lob
+    @Column(name = "Homepage")
+    private String homePage;
 
 }

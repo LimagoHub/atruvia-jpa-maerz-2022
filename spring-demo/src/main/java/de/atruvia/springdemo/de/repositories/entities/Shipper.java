@@ -1,4 +1,4 @@
-package de.limago.entities;
+package de.atruvia.springdemo.de.repositories.entities;
 
 import lombok.*;
 
@@ -11,15 +11,12 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
-@Table(name = "orders")
-public class OrderEntity {
+@Table(name = "shippers")
+public class Shipper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "OrderID", nullable = false)
+    @Column(name = "ShipperID", nullable = false)
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CustomerID")
-    private CustomerEntity customerID;
 
     //TODO Reverse Engineering! Migrate other columns to the entity
 }
