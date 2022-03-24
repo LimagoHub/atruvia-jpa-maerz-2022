@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -61,5 +63,9 @@ public class Order {
 
     @Column(name = "Shipcountry", length = 15)
     private String shipCountry;
+
+    @OneToMany(mappedBy = "orderID", cascade = {CascadeType.ALL})
+    List<OrderDetail> orderDetails = new ArrayList<>();
+
 
 }

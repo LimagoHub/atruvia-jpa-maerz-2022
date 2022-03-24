@@ -19,6 +19,14 @@ import java.util.List;
                 @NamedQuery(name="Customer.findNachKontakt",query = "select c from Customer c where c.contactName = :contactName")
         }
 )
+@NamedEntityGraph(name = "graph.Customer.orders",  attributeNodes = @NamedAttributeNode(value ="orders",
+        subgraph = "employeeID"),subgraphs = @NamedSubgraph(name = "employeeID", attributeNodes = @NamedAttributeNode("employeeID")))
+
+
+
+
+
+
 public class Customer {
     @Id
     @Column(name = "CustomerID", nullable = false, length = 5)

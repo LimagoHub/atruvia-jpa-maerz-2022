@@ -20,11 +20,13 @@ public class OrderDetail {
     @MapsId("orderID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Orderid", nullable = false)
+    @ToString.Exclude
     private Order orderID;
 
     @MapsId("productID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Productid", nullable = false)
+    @ToString.Exclude
     private Product productID;
 
     @Column(name = "Unitprice", nullable = false, precision = 10, scale = 4)
@@ -35,5 +37,10 @@ public class OrderDetail {
 
     @Column(name = "Discount", nullable = false, precision = 8)
     private BigDecimal discount;
+
+    @Transient
+    public BigDecimal getTotal() {
+        return unitPrice.multiply(BigDecimal.valueOf(quantity));
+    }
 
 }

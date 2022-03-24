@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -49,4 +49,20 @@ public class Product {
     @Column(name = "Discontinued", nullable = false)
     private Boolean discontinued = false;
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Product{");
+        sb.append("id=").append(id);
+        sb.append(", productName='").append(productName).append('\'');
+        sb.append(", supplierID=").append(supplierID);
+        sb.append(", categoryID=").append(categoryID);
+        sb.append(", quantityPerUnit='").append(quantityPerUnit).append('\'');
+        sb.append(", unitPrice=").append(unitPrice);
+        sb.append(", unitsInStock=").append(unitsInStock);
+        sb.append(", unitsOnOrder=").append(unitsOnOrder);
+        sb.append(", reorderLevel=").append(reorderLevel);
+        sb.append(", discontinued=").append(discontinued);
+        sb.append('}');
+        return sb.toString();
+    }
 }

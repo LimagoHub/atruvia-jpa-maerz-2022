@@ -66,7 +66,7 @@ public class Employee {
     private String notes;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ReportsTo")
+    @JoinColumn(name = "Reportsto")
     private Employee reportsTo;
 
     @Column(name = "PhotoPath")
